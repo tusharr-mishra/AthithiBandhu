@@ -1,164 +1,222 @@
-# 🏨 AthithiBandhu — Full-Stack Vacation Rental Marketplace
+<div style="font-family: 'Times New Roman', Times, serif;">
+
+# AthithiBandhu — Vacation Rental & Hospitality Platform
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Node.js-v20+-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-  <img src="https://img.shields.io/badge/Express-v5.2.1-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express 5" />
-  <img src="https://img.shields.io/badge/MongoDB-Atlas%20%2F%20Local-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
-  <img src="https://img.shields.io/badge/Mapbox%20GL-v3.x-000000?style=for-the-badge&logo=mapbox&logoColor=white" alt="Mapbox GL" />
-  <img src="https://img.shields.io/badge/Cloudinary-Media%20CDN-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white" alt="Cloudinary" />
-  <img src="https://img.shields.io/badge/Architecture-MVC%20RESTful-orange?style=for-the-badge" alt="Architecture" />
+  <a href="https://athithibandhu.onrender.com" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Render%20Production-0052CC?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo" />
+  </a>
+  <a href="https://github.com/tusharr-mishra/AthithiBandhu" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo" />
+  </a>
+  <img src="https://img.shields.io/badge/Node.js-v24.x-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Express-v5.2-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express 5" />
+  <img src="https://img.shields.io/badge/MongoDB-Atlas%20Cluster-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB Atlas" />
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License" />
 </p>
 
+<div align="center">
+
+| Deployment Resource | Target URL / Status |
+| :--- | :--- |
+| **Production Web Service** | `https://athithibandhu.onrender.com` *(Paste your Render Live URL here)* |
+| **API Health Status** | `Operational — HTTP 200 OK` |
+| **Database Cluster** | `MongoDB Atlas (Cloud Database Cluster0)` |
+| **Source Repository** | [https://github.com/tusharr-mishra/AthithiBandhu](https://github.com/tusharr-mishra/AthithiBandhu) |
+
+</div>
+
 ---
 
-## 📖 Table of Contents
-1. [Overview & Value Proposition](#-overview--value-proposition)
-2. [Application Showcase](#-application-showcase)
-3. [System Architecture](#-system-architecture)
-4. [Key Engineering Deep-Dives](#-key-engineering-deep-dives)
-   - [Atomic Concurrency & Race Condition Elimination](#1-atomic-concurrency--race-condition-elimination)
+## Table of Contents
+1. [Executive Summary](#executive-summary)
+2. [Core Application Showcase](#core-application-showcase)
+3. [System Architecture & MVC Implementation](#system-architecture--mvc-implementation)
+4. [Engineering Deep-Dives](#engineering-deep-dives)
+   - [Atomic Concurrency & Double-Booking Elimination](#1-atomic-concurrency--double-booking-elimination)
    - [Regional Currency & Taxation Rules Engine](#2-regional-currency--taxation-rules-engine)
    - [Dynamic Forward Geocoding with Mapbox GL](#3-dynamic-forward-geocoding-with-mapbox-gl)
-   - [Cloudinary Media Pipeline & Storage](#4-cloudinary-media-pipeline--storage)
-5. [Database Modeling & Schema Design](#-database-modeling--schema-design)
-6. [RESTful API Specification](#-restful-api-specification)
-7. [Security & Production Hardening](#-security--production-hardening)
-8. [Directory Structure](#-directory-structure)
-9. [Getting Started & Local Setup](#-getting-started--local-setup)
-10. [Author & License](#-author--license)
+   - [Cloudinary Media Storage Pipeline](#4-cloudinary-media-storage-pipeline)
+   - [Persistent MongoStore Session Architecture](#5-persistent-mongostore-session-architecture)
+5. [Database Modeling & Schema Design](#database-modeling--schema-design)
+6. [RESTful API Specification](#restful-api-specification)
+7. [Security & Production Hardening](#security--production-hardening)
+8. [Directory Structure](#directory-structure)
+9. [Local Setup & Environment Configuration](#local-setup--environment-configuration)
+10. [Author & License](#author--license)
 
 ---
 
-## 🌐 Overview & Value Proposition
+## Executive Summary
 
-**AthithiBandhu** (inspired by the Sanskrit philosophy *"Atithi Devo Bhava"* — Guest is God) is a full-stack, production-grade hospitality marketplace connecting travelers with unique accommodations worldwide.
+**AthithiBandhu** is a full-stack hospitality marketplace engineered to reflect enterprise-level standards suitable for top-tier software engineering teams. Inspired by the philosophy *"Atithi Devo Bhava"*, the platform delivers a reliable, end-to-end reservation experience across international destinations.
 
-Designed and engineered to meet the technical standards of top-tier engineering organizations (**FAANG / MAANG**), this platform goes beyond a basic CRUD project by solving real-world distributed systems challenges:
-* **ACID-Compliant Concurrency**: Guarantees zero double-booking race conditions at the database storage engine layer.
-* **Regional Intelligence**: Automatically adapts currency symbols, formatting locales, and regional hospitality taxes (e.g., GST in India, Lodging Tax in USA, VAT in Europe).
-* **High-Precision Geospatial Integration**: Translates physical addresses into GeoJSON coordinates on the fly via Mapbox SDK and visualizes them on hardware-accelerated interactive maps.
-* **Strict MVC Modularity**: Clean separation of Models, Views, Controllers, Middlewares, and Utilities for enterprise scalability.
-
----
-
-## 📸 Application Showcase
-
-| 🌟 Explore Listings & Categories | 🏡 Listing Details & Live Pricing |
-| :---: | :---: |
-| ![Explore Listings](assets/screenshots/01_explore_listings.png) | ![Listing Details](assets/screenshots/02_listing_details.png) |
-
-| 🗺️ Interactive Dynamic Mapbox | 🌐 Multi-Currency & Language Modal |
-| :---: | :---: |
-| ![Dynamic Mapbox](assets/screenshots/03_dynamic_mapbox.png) | ![Currency & Language](assets/screenshots/04_currency_language_modal.png) |
-
-| 📅 Guest Bookings Dashboard | ✍️ Host Listing Creation & Map Preview |
-| :---: | :---: |
-| ![User Bookings](assets/screenshots/07_user_bookings.png) | ![Create Listing](assets/screenshots/08_create_listing.png) |
-
-| 🔐 User Signup with Dynamic Geo API | 🔑 Secure Session Authentication |
-| :---: | :---: |
-| ![User Signup](assets/screenshots/05_user_signup.png) | ![User Login](assets/screenshots/06_user_login.png) |
+### Key Differentiators
+* **ACID Concurrency Protection**: Solves the classic distributed double-booking race condition directly at the storage engine layer using atomic conditional updates.
+* **Regional Intelligence**: Dynamically resolves currency symbols, formatting locales, and regional hospitality taxes (e.g. 18% GST in India, 14% Lodging Tax in USA, 20% VAT in UK) based on destination coordinates.
+* **Geospatial Precision**: Forward-geocodes addresses into GeoJSON Point coordinates with boundary validation and displays interactive Mapbox GL JS map views.
+* **Enterprise Modularity**: Structured on a clean Model-View-Controller (MVC) pattern with centralized middleware guards and persistent cloud session caching via `connect-mongo`.
 
 ---
 
-## 🏛️ System Architecture
+## Core Application Showcase
 
-AthithiBandhu follows a strict **Model-View-Controller (MVC)** design pattern, keeping route declarations declarative, business logic decoupled in dedicated controllers, and views cleanly organized.
+<div align="center">
+
+| Explore Listings & Categories | Listing View & Sticky Reservation Card |
+| :---: | :---: |
+| <img src="assets/01_explore_listings.png" alt="Explore Listings" width="460" /> | <img src="assets/02_listing_details.png" alt="Listing Details" width="460" /> |
+| *Destination search, category navigation & price display* | *Pricing breakdown, reviews & guest reservation form* |
+
+| Interactive Dynamic Mapbox | Guest Bookings Dashboard |
+| :---: | :---: |
+| <img src="assets/03_dynamic_mapbox.png" alt="Dynamic Mapbox" width="460" /> | <img src="assets/07_user_bookings.png" alt="User Bookings" width="460" /> |
+| *Real-time geocoded coordinates, pins & popups* | *Trip history, status badges & cancellation actions* |
+
+</div>
+
+<details>
+<summary><b>View Additional Application Interfaces (Auth & Property Creation)</b></summary>
+<br>
+<div align="center">
+
+| Multi-Currency & Language Modal | Property Creation with Live Preview |
+| :---: | :---: |
+| <img src="assets/04_currency_language_modal.png" alt="Currency Modal" width="460" /> | <img src="assets/08_create_listing.png" alt="Create Listing" width="460" /> |
+
+| User Registration (Geo API) | Authentication Login Page |
+| :---: | :---: |
+| <img src="assets/05_user_signup.png" alt="User Signup" width="460" /> | <img src="assets/06_user_login.png" alt="User Login" width="460" /> |
+
+</div>
+</details>
+
+---
+
+## System Architecture & MVC Implementation
+
+The application is architected around strict Model-View-Controller separation, ensuring decoupling between routing, domain logic, and presentation.
+
+<div align="center">
 
 ```mermaid
 flowchart TD
-    Client([🌐 Client Browser / Guest])
-    
-    subgraph Express_App ["Express.js Application Layer (v5)"]
+    Client([Client Browser])
+
+    subgraph App_Layer ["Express 5 Application Boundary"]
         Router["RESTful Routers (/listings, /bookings, /users, /reviews)"]
-        MW_Auth["Authentication Guard (isLoggedIn)"]
-        MW_Perm["Authorization Guard (isOwner, isReviewAuthor)"]
-        MW_Val["Payload Validation (Joi Schemas)"]
-        Controllers["Controllers (Pure Business Logic)"]
+        AuthGuard["Auth Guard (isLoggedIn)"]
+        OwnerGuard["Ownership Guard (isOwner, isReviewAuthor)"]
+        JoiVal["Payload Validation (Joi Schemas)"]
+        Controllers["Domain Controllers (Pure Business Logic)"]
     end
-    
-    subgraph External_Services ["External Cloud Services"]
-        Mapbox["Mapbox Geocoding SDK & GL JS"]
-        Cloudinary["Cloudinary CDN (Image Transformations)"]
-        GeoAPI["CountriesNow API (Dynamic City/Country)"]
+
+    subgraph External_Cloud ["Cloud Infrastructure"]
+        Atlas[("MongoDB Atlas (Cloud Cluster)")]
+        MapboxSDK["Mapbox Geocoding SDK"]
+        CloudinaryCDN["Cloudinary Media CDN"]
     end
-    
-    subgraph Database_Layer ["Storage & Database Engine"]
-        Mongoose["Mongoose ODM Models (Schemas, Hooks, Indexes)"]
-        WiredTiger[("MongoDB WiredTiger (Document-Level ACID Locking)")]
+
+    subgraph Presentation ["View Layer"]
+        EJSTemplates["EJS-Mate Master Layouts"]
     end
 
     Client -->|HTTP Request| Router
-    Router --> MW_Auth --> MW_Perm --> MW_Val --> Controllers
-    Controllers -->|Forward Geocode| Mapbox
-    Controllers -->|Upload Image Buffer| Cloudinary
-    Client -.->|Fetch Countries/Cities| GeoAPI
-    Controllers --> Mongoose --> WiredTiger
-    WiredTiger -->|Atomic Result| Controllers
-    Controllers -->|Render EJS / Send JSON| Client
+    Router --> AuthGuard --> OwnerGuard --> JoiVal --> Controllers
+    Controllers -->|Forward Geocode| MapboxSDK
+    Controllers -->|Stream Media Upload| CloudinaryCDN
+    Controllers -->|Atomic ACID Queries| Atlas
+    Atlas -->|State Result| Controllers
+    Controllers -->|Render View| EJSTemplates
+    EJSTemplates -->|HTML / CSS / JS| Client
 ```
+
+</div>
 
 ---
 
-## ⚡ Key Engineering Deep-Dives
+## Engineering Deep-Dives
 
-### 1. Atomic Concurrency & Race Condition Elimination
-* **The Problem**: In hospitality booking systems, a high-frequency race condition ("Check-Then-Act") occurs when two concurrent guests query availability for the same listing and overlapping dates at the exact same millisecond. Traditional multi-step logic (`isAvailable() -> saveBooking()`) results in severe double-booking bugs.
-* **The Engineering Solution**: AthithiBandhu leverages MongoDB’s document-level ACID guarantees inside the **WiredTiger** storage engine. By maintaining a discrete `bookedDates` array of unique ISO night strings (`YYYY-MM-DD`) on the listing document, reservation is handled via a **single atomic instruction**:
-  ```javascript
-  const reservedListing = await Listing.findOneAndUpdate(
-      { 
-          _id: id, 
-          bookedDates: { $nin: requestedDates } 
-      },
-      { 
-          $push: { bookedDates: { $each: requestedDates } } 
-      },
-      { new: true }
-  );
+### 1. Atomic Concurrency & Double-Booking Elimination
+* **The Engineering Problem**: When multiple users attempt to reserve the same listing for overlapping dates simultaneously, standard non-atomic patterns (`isAvailable() -> saveBooking()`) introduce a "Check-Then-Act" race condition. Both requests observe available slots and confirm conflicting stays.
+* **The Solution**: AthithiBandhu tracks reserved nights as an array of unique ISO date strings (`YYYY-MM-DD`) on the `Listing` document. The reservation query combines availability verification and reservation into a single atomic instruction executed via MongoDB's WiredTiger storage engine:
 
-  if (!reservedListing) {
-      req.flash("error", "The selected dates were just reserved by another guest. Please choose alternative dates.");
-      return res.redirect(`/listings/${id}`);
-  }
-  ```
-  * **Result**: The first client acquiring the document lock evaluates `$nin` to `true`, atomically appends the dates, and commits. Any overlapping concurrent request evaluates `$nin` to `false`, returning `null`. This guarantees zero double-bookings without needing complex distributed Redis lock managers.
-  * **Cancellation**: Cancelled stays atomically `$pull` the dates back out of `bookedDates`, instantly releasing inventory.
+```javascript
+// Atomic reservation instruction: prevents race conditions at the storage engine level
+const reservedListing = await Listing.findOneAndUpdate(
+    {
+        _id: id,
+        bookedDates: { $nin: requestedDates }
+    },
+    {
+        $push: { bookedDates: { $each: requestedDates } }
+    },
+    { new: true }
+);
+
+if (!reservedListing) {
+    req.flash("error", "The selected dates were just reserved by another guest. Please choose alternative dates.");
+    return res.redirect(`/listings/${id}`);
+}
+```
+
+* **Guarantee**: MongoDB's single-document write lock ensures only the first arrival acquires the lock, appends the dates, and commits. Competing concurrent queries evaluate `$nin` as false and return `null`, entirely preventing double bookings without requiring external lock orchestrators.
+* **Release on Cancellation**: Cancelled stays atomically invoke `$pull: { bookedDates: { $in: booking.bookedDates } }` to immediately release inventory.
 
 ---
 
 ### 2. Regional Currency & Taxation Rules Engine
-Accommodations span multiple countries with differing currency symbols, formatting standards, and regional hospitality taxes. AthithiBandhu features a built-in regional taxation rules engine ([utils/currency.js](file:///c:/Users/tusha/OneDrive/Documents/WebDev/MAJORPROJECT/utils/currency.js)):
-* **Dynamic Geocoding Mapping**: Automatically detects the country and applies localized rules:
-  * 🇮🇳 **India**: `INR (₹)`, locale `en-IN`, 18% GST.
-  * 🇺🇸 **USA**: `USD ($)`, locale `en-US`, 14% Lodging Tax & Tourism Fees.
-  * 🇬🇧 **UK**: `GBP (£)`, locale `en-GB`, 20% VAT & Hospitality Tax.
-  * 🇪🇺 **Eurozone**: `EUR (€)`, locale `de-DE`/`it-IT`/`fr-FR`, 10–14% City Tourism Tax.
-  * 🇦🇪 **UAE**: `AED`, locale `en-AE`, 10% Tourism Fee & Municipality Tax.
-  * 🇯🇵 **Japan**: `JPY (¥)`, locale `ja-JP`, 10% Consumption Tax.
-* **Client-Side Live Conversions**: Guests can toggle pre-tax and tax-inclusive pricing with one click or open the multi-currency modal to convert listings globally using live exchange normalization.
+Accommodations span multiple international jurisdictions. The currency engine (`utils/currency.js`) dynamically configures pricing structures and tax percentages based on destination country:
+
+<div align="center">
+
+| Region / Country | Currency Code | Symbol | Formatting Locale | Regional Hospitality Tax |
+| :--- | :--- | :--- | :--- | :--- |
+| **India** | `INR` | ₹ | `en-IN` | **18% GST** |
+| **United States** | `USD` | $ | `en-US` | **14% Lodging Tax & Tourism Fees** |
+| **United Kingdom** | `GBP` | £ | `en-GB` | **20% VAT & Hospitality Tax** |
+| **Eurozone (Italy, France, Germany)** | `EUR` | € | `it-IT` / `fr-FR` | **12% City Lodging Tax** |
+| **United Arab Emirates** | `AED` | AED | `en-AE` | **10% Tourism Fee & VAT** |
+| **Japan** | `JPY` | ¥ | `ja-JP` | **10% Consumption Tax** |
+
+</div>
 
 ---
 
 ### 3. Dynamic Forward Geocoding with Mapbox GL
-* On listing creation or update, the property's address is submitted to Mapbox’s Forward Geocoding API (`@mapbox/mapbox-sdk/services/geocoding`).
-* GeoJSON coordinates `[longitude, latitude]` are validated with boundary bounds checking (`[-180, 180]`, `[-90, 90]`) and stored directly within MongoDB.
-* The frontend initializes a responsive **Mapbox GL JS** instance featuring:
-  * Custom styled map pins.
-  * Interactive popups with property details.
-  * Fullscreen controls & zoom navigation.
-  * Coordinate fallback resolution for legacy/seed data.
+* Coordinates are calculated during listing creation or updates via `@mapbox/mapbox-sdk/services/geocoding`.
+* Extracted coordinates undergo bounding validations (`-180 <= lng <= 180`, `-90 <= lat <= 90`) prior to storage as GeoJSON `Point` objects:
+  ```javascript
+  geometry: {
+      type: "Point",
+      coordinates: [longitude, latitude]
+  }
+  ```
+* The frontend initializes a Mapbox GL JS map instance with customized markers, interactive popups, and full-screen controls.
 
 ---
 
-### 4. Cloudinary Media Pipeline & Storage
-* Images are parsed directly from multi-part form data via `multer` and streamed directly to **Cloudinary** using `multer-storage-cloudinary-v2`.
-* Automatically transforms user-uploaded assets into optimized WebP/JPEG formats, enforces filetype whitelisting, and isolates staging folders.
+### 4. Cloudinary Media Storage Pipeline
+* Property media files are parsed via `multer` and streamed directly to Cloudinary using `multer-storage-cloudinary-v2`.
+* Automatically transforms user-uploaded assets into optimized WebP formats with image format whitelisting (`jpeg`, `jpg`, `png`, `webp`).
 
 ---
 
-## 🗄️ Database Modeling & Schema Design
+### 5. Persistent MongoStore Session Architecture
+* To ensure user sessions survive server restarts and scale seamlessly in production environments (like Render), session storage is backed by MongoDB Atlas using `connect-mongo`:
+```javascript
+const store = MongoStore.create({
+    mongoUrl: MONGO_URL,
+    crypto: { secret: SESSION_SECRET },
+    touchAfter: 24 * 3600 // Lazy session update: only touches DB after 24 hours unless modified
+});
+```
+
+---
+
+## Database Modeling & Schema Design
+
+<div align="center">
 
 ```
 +-------------------------------------------------------+
@@ -169,27 +227,22 @@ Accommodations span multiple countries with differing currency symbols, formatti
 | email: String (Unique, Indexed)                       |
 | name: String                                          |
 | dateOfBirth: Date                                     |
-| city: String                                          |
-| country: String                                       |
+| city: String, country: String                         |
 | sex: Enum ("Male", "Female", "Other", "Prefer not")   |
 +-------------------------------------------------------+
                            | 1
-                           | 
                            | owns
                            v *
 +-------------------------------------------------------+
 |                      Listing                          |
 +-------------------------------------------------------+
 | _id: ObjectId (PK)                                    |
-| title: String                                         |
-| description: String                                   |
+| title: String, description: String                    |
 | image: { url: String, filename: String }              |
-| price: Number                                         |
-| location: String                                      |
-| country: String                                       |
+| price: Number, location: String, country: String      |
 | category: String (Default: "Popular")                 |
 | isGuestFavourite: Boolean                             |
-| bookedDates: [String] (ISO: "YYYY-MM-DD")             |
+| bookedDates: [String] ("YYYY-MM-DD")                  |
 | geometry: { type: "Point", coordinates: [Lng, Lat] }  |
 | owner: ObjectId -> User                               |
 | reviews: [ObjectId -> Review]                         |
@@ -214,69 +267,56 @@ Accommodations span multiple countries with differing currency symbols, formatti
 |         "cancelled"     |
 | listingTitle: String    |
 | listingImage: String    |
-| listingLocation: String |
 +-------------------------+
 ```
 
-### Key Schema Optimizations:
-1. **Compound Index**: `bookingSchema.index({ listing: 1, user: 1, status: 1 })` optimizes dashboard queries for user reservation history.
-2. **Snapshot Persistence**: `Booking` documents preserve listing snapshots (`listingTitle`, `listingImage`, `listingLocation`) so past bookings remain readable even if a host edits or deletes the original property.
-3. **Cascade Deletes**: Mongoose `post("findOneAndDelete")` lifecycle hooks automatically prune orphaned reviews when a listing is deleted.
+</div>
 
 ---
 
-## 📡 RESTful API Specification
+## RESTful API Specification
 
-| HTTP Verb | Endpoint | Middleware Guards | Description |
+<div align="center">
+
+| Method | Endpoint | Authorization / Middleware | Description |
 | :--- | :--- | :--- | :--- |
-| **GET** | `/listings` | None | Browse all listings, filter by category, or search destinations |
+| **GET** | `/listings` | None | Browse listings with keyword and category filtering |
 | **GET** | `/listings/new` | `isLoggedIn` | Render listing creation form |
-| **POST** | `/listings` | `isLoggedIn`, `upload.single()`, `validateListing` | Publish new listing with Mapbox geocoding & Cloudinary upload |
-| **GET** | `/listings/:id` | None | View detailed listing page, reviews, and interactive map |
-| **GET** | `/listings/:id/edit` | `isLoggedIn`, `isOwner` | Render edit form for listing owner |
-| **PUT** | `/listings/:id` | `isLoggedIn`, `isOwner`, `upload.single()`, `validateListing` | Update listing details and re-geocode coordinates |
-| **DELETE** | `/listings/:id` | `isLoggedIn`, `isOwner` | Delete listing and cascade delete its reviews |
+| **POST** | `/listings` | `isLoggedIn`, `upload.single()`, `validateListing` | Create new listing with geocoding and image upload |
+| **GET** | `/listings/:id` | None | Show listing details, reviews, and dynamic map |
+| **GET** | `/listings/:id/edit` | `isLoggedIn`, `isOwner` | Render edit listing form |
+| **PUT** | `/listings/:id` | `isLoggedIn`, `isOwner`, `upload.single()` | Update listing details and refresh map coordinates |
+| **DELETE** | `/listings/:id` | `isLoggedIn`, `isOwner` | Delete listing and cascade delete associated reviews |
 | **POST** | `/listings/:id/bookings` | `isLoggedIn` | Reserve stay dates (Atomic Concurrency Protected) |
 | **GET** | `/bookings` | `isLoggedIn` | View authenticated user's reservation dashboard |
-| **DELETE** | `/bookings/:bookingId` | `isLoggedIn` | Cancel booking and release dates back to listing inventory |
-| **DELETE** | `/bookings/:bookingId/remove` | `isLoggedIn` | Permanently remove reservation record from user history |
-| **POST** | `/listings/:id/reviews` | `isLoggedIn`, `validateReview` | Submit a review with star rating for a listing |
-| **GET** | `/listings/:id/reviews/:reviewId/edit` | `isLoggedIn`, `isReviewAuthor` | Render review edit form |
-| **PUT** | `/listings/:id/reviews/:reviewId` | `isLoggedIn`, `isReviewAuthor`, `validateReview` | Update rating and review comment |
-| **DELETE** | `/listings/:id/reviews/:reviewId` | `isLoggedIn`, `isReviewAuthor` | Remove review from listing |
-| **GET** | `/users/signup` | None | Render registration page |
+| **DELETE** | `/bookings/:bookingId` | `isLoggedIn` | Cancel booking and release dates back to inventory |
+| **DELETE** | `/bookings/:bookingId/remove`| `isLoggedIn` | Permanently remove booking from history |
+| **POST** | `/listings/:id/reviews` | `isLoggedIn`, `validateReview` | Submit rating and review for a listing |
+| **DELETE** | `/listings/:id/reviews/:reviewId` | `isLoggedIn`, `isReviewAuthor` | Delete user review |
 | **POST** | `/users/signup` | None | Register new user account |
-| **GET** | `/users/login` | None | Render authentication login page |
-| **POST** | `/users/login` | `savedRedirectUrl`, `passport.authenticate()` | Authenticate credentials and restore target URL |
-| **POST** | `/users/logout` | None | Invalidate session cookie and log out |
+| **POST** | `/users/login` | `savedRedirectUrl`, `passport.authenticate()` | Authenticate user and restore redirect URL |
+| **POST** | `/users/logout` | None | Invalidate session and log out |
+
+</div>
 
 ---
 
-## 🔒 Security & Production Hardening
+## Security & Production Hardening
 
-1. **Joi Schema Validation**: Incoming payloads are validated against strict schemas before hitting controllers, mitigating malformed inputs and prototype pollution.
-2. **Regex Injection Protection**: User search keywords are sanitized with regex escape sequences (`/[.*+?^${}()|[\]\\]/g`) to prevent catastrophic backtracking (ReDoS).
-3. **Session Cookie Hardening**:
-   ```javascript
-   cookie: {
-       httpOnly: true, // Prevents XSS script access to session tokens
-       sameSite: "lax", // Mitigates Cross-Site Request Forgery (CSRF)
-       secure: process.env.NODE_ENV === "production", // Enforces HTTPS in production
-       maxAge: 7 * 24 * 60 * 60 * 1000
-   }
-   ```
-4. **Environment Isolation**: Sensitive credentials (Mapbox public tokens, Cloudinary API secrets, MongoDB URIs) are kept strictly out of version control via `.env` and `.gitignore`.
-5. **Centralized Error Boundary**: Universal Express error handling middleware traps asynchronous rejections, provides user-friendly status pages, and masks internal stack traces in production.
+1. **Joi Schema Validation**: Validates all incoming request bodies against explicit schemas prior to controller invocation.
+2. **ReDoS Sanitization**: User search inputs are escaped using regex sequence sanitization (`/[.*+?^${}()|[\]\\]/g`).
+3. **Session Cookie Security**: Configured with `httpOnly: true`, `sameSite: "lax"`, and HTTPS encryption in production.
+4. **Environment Isolation**: Sensitive credentials (database URIs, Cloudinary keys, Mapbox tokens) are isolated in `.env` and excluded from source control.
+5. **Centralized Error Boundary**: Universal Express error handling traps async rejections and renders user-friendly error views.
 
 ---
 
-## 📂 Directory Structure
+## Directory Structure
 
 ```
 AthithiBandhu/
-├── assets/
-│   └── screenshots/            # High-resolution portfolio showcase imagery
-├── controllers/                # Business logic handlers (MVC)
+├── assets/                     # Portfolio showcase screenshots
+├── controllers/                # MVC Business logic handlers
 │   ├── booking.js              # Booking creation, atomic concurrency & cancellation
 │   ├── listing.js              # Listings CRUD, search filters & Mapbox geocoding
 │   ├── review.js               # Review submission, edit & removal
@@ -292,83 +332,66 @@ AthithiBandhu/
 │   ├── review.js               # /listings/:id/reviews endpoints
 │   └── user.js                 # /users authentication endpoints
 ├── views/                      # Server-Rendered EJS Views & Layouts
-│   ├── bookings/               # User bookings dashboard
-│   ├── includes/               # Navbar, footer, flash alerts, language/currency modal
-│   ├── layouts/                # Boilerplate master layout
-│   ├── listings/               # Index catalog, show details, new/edit forms
-│   ├── reviews/                # Review editing forms
-│   └── users/                  # Login and signup views
-├── public/                     # Static Client Assets
-│   ├── css/                    # Modular stylesheets (listings, navbar, forms, style)
-│   └── js/                     # Client scripts (Mapbox GL, currency converter, live booking)
-├── utils/                      # Shared Helper Utilities
-│   ├── currency.js             # Regional currency & hospitality tax engine
-│   ├── ExpressErrors.js        # Custom error class with HTTP status codes
-│   └── wrapAsync.js            # Asynchronous route wrapper
-├── init/                       # Database Initialization & Sample Data
-│   ├── data.js                 # Curated global listing seed records
-│   └── index.js                # Database seeder script
+├── public/                     # Client Assets (CSS, Mapbox GL JS, Currency engine)
+├── utils/                      # Helper utilities (currency engine, error classes)
+├── init/                       # Database initialization and sample dataset
+├── middleware.js               # Centralized authentication & validation guards
 ├── cloudConfig.js              # Cloudinary SDK & Multer storage configuration
-├── middleware.js               # Centralized auth, permission & validation guards
-├── schema.js                   # Joi validation schemas
-├── app.js                      # Express server entry point & middleware chain
+├── app.js                      # Express server entry point & middleware pipeline
 ├── LICENSE                     # MIT Open-Source License
-└── package.json                # Project dependencies and npm scripts
+└── package.json                # Project dependencies and engines
 ```
 
 ---
 
-## 🚀 Getting Started & Local Setup
+## Local Setup & Environment Configuration
 
 ### 1. Prerequisites
-* **Node.js** (v18.x or later)
+* **Node.js** (v20+ or v24.x)
 * **MongoDB** (Local instance or MongoDB Atlas cluster)
 * **Mapbox Account** (Public access token)
 * **Cloudinary Account** (Cloud name, API key, API secret)
 
-### 2. Clone the Repository
+### 2. Clone Repository & Install Dependencies
 ```bash
 git clone https://github.com/tusharr-mishra/AthithiBandhu.git
 cd AthithiBandhu
-```
-
-### 3. Install Dependencies
-```bash
 npm install
 ```
 
-### 4. Configure Environment Variables
-Create a `.env` file in the project root:
+### 3. Environment Variables
+Create a `.env` file in the root directory:
 ```env
 PORT=8080
-MONGO_URL=mongodb://127.0.0.1:27017/AthithiBandhu
+ATLASDB_URL=your_mongodb_atlas_connection_string
 SESSION_SECRET=your_super_secret_session_key
-MAPBOX_TOKEN=pk.your_mapbox_public_token
+MAPBOX_TOKEN=your_mapbox_public_token
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
 
-### 5. Seed the Database (Optional)
-To initialize the database with curated sample listings from around the world:
+### 4. Database Seeding (Optional)
 ```bash
 node init/index.js
 ```
 
-### 6. Run the Application
+### 5. Start the Application
 ```bash
-# Development mode with Nodemon
+# Development mode
 npm run dev
 
 # Production mode
 npm start
 ```
 
-Open your browser and navigate to `http://localhost:8080`.
+Navigate to `http://localhost:8080` in your web browser.
 
 ---
 
-## 👤 Author & License
+## Author & License
 
 * **Author**: [Tushar Mishra](https://github.com/tusharr-mishra)
-* **License**: This project is licensed under the [MIT License](LICENSE) — feel free to explore, learn, and adapt for your own educational projects!
+* **License**: This project is licensed under the [MIT License](LICENSE).
+
+</div>
