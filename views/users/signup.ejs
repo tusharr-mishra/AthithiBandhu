@@ -1,0 +1,189 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container my-4">
+    <div class="row justify-content-center mt-4 mb-5">
+        <div class="col-lg-7 col-md-9 col-sm-12">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-md-5">
+
+                    <h2 class="text-center mb-2">Create Your Account</h2>
+
+                    <p class="text-center text-muted mb-4">
+                        Join AthithiBandhu and get started today.
+                    </p>
+
+                    <form action="/users/signup" method="POST" class="needs-validation" novalidate>
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">
+                                Full Name
+                            </label>
+
+                            <input type="text" id="name" name="user[name]" class="form-control"
+                                placeholder="Enter your full name" autocomplete="name" minlength="2" maxlength="100"
+                                required>
+
+                            <div class="invalid-feedback">
+                                Please enter your full name.
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                Email Address
+                            </label>
+
+                            <input type="email" id="email" name="user[email]" class="form-control"
+                                placeholder="Enter your email address" autocomplete="email" required>
+
+                            <div class="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="mb-3">
+                            <label for="dateOfBirth" class="form-label">
+                                Date of Birth
+                            </label>
+
+                            <input type="date" id="dateOfBirth" name="user[dateOfBirth]" class="form-control"
+                                autocomplete="bday" required>
+
+                            <div class="invalid-feedback">
+                                Please select your date of birth.
+                            </div>
+                        </div>
+
+                        <!-- Country and City -->
+                        <div class="row">
+
+                            <!-- Country -->
+                            <div class="col-md-6 mb-3">
+                                <label for="country" class="form-label">
+                                    Country
+                                </label>
+
+                                <select id="country" name="user[country]" class="form-select"
+                                    autocomplete="country-name" required>
+                                    <option value="" selected disabled>
+                                        Loading countries...
+                                    </option>
+                                </select>
+
+                                <div class="invalid-feedback">
+                                    Please select your country.
+                                </div>
+                            </div>
+
+                            <!-- City -->
+                            <div class="col-md-6 mb-3">
+                                <label for="city" class="form-label">
+                                    City
+                                </label>
+
+                                <select id="city" name="user[city]" class="form-select" autocomplete="address-level2"
+                                    required disabled>
+                                    <option value="" selected>
+                                        Select a country first
+                                    </option>
+                                </select>
+
+                                <div class="invalid-feedback">
+                                    Please select your city.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Sex -->
+                        <div class="mb-3">
+                            <label for="sex" class="form-label">
+                                Sex
+                            </label>
+
+                            <select id="sex" name="user[sex]" class="form-select" required>
+                                <option value="" selected disabled>
+                                    Select an option
+                                </option>
+
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                                <option value="Prefer not to say">
+                                    Prefer not to say
+                                </option>
+                            </select>
+
+                            <div class="invalid-feedback">
+                                Please select an option.
+                            </div>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">
+                                Username
+                            </label>
+
+                            <input type="text" id="username" name="user[username]" class="form-control"
+                                placeholder="Choose a username" autocomplete="username" minlength="3" maxlength="30"
+                                pattern="[A-Za-z0-9_]+" title="Use only letters, numbers, and underscores." required>
+
+                            <div class="form-text">
+                                Use at least 3 characters. Letters, numbers,
+                                and underscores are allowed.
+                            </div>
+
+                            <div class="invalid-feedback">
+                                Enter a username using letters, numbers,
+                                and underscores.
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-4">
+                            <label for="password" class="form-label">
+                                Password
+                            </label>
+
+                            <input type="password" id="password" name="user[password]" class="form-control"
+                                placeholder="Create a password" autocomplete="new-password" minlength="8" required>
+
+                            <div class="form-text">
+                                Your password must contain at least 8 characters.
+                            </div>
+
+                            <div class="invalid-feedback">
+                                Please enter a password of at least 8 characters.
+                            </div>
+                        </div>
+
+                        <!-- Red Create Account Button -->
+                        <button type="submit" class="btn w-100 signup-btn">
+                            Create Account
+                        </button>
+
+                        <!-- Login Link -->
+                        <p class="text-center mt-4 mb-0">
+                            Already have an account?
+                            <a href="/users/login" class="signup-link text-decoration-none">
+                                Log in
+                            </a>
+                        </p>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <!-- Country and City Dropdown API & Validation Logic -->
+    <script src="/js/signup.js"></script>
+

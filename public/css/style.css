@@ -1,0 +1,327 @@
+/* ==========================================================================
+   AthithiBandhu - Global Base Stylesheet & Design System
+   Font: Georgia / Times New Roman (Consistent across entire application)
+   ========================================================================== */
+
+:root {
+    --brand-red: #ff385c;
+    --brand-red-hover: #e00b41;
+    --brand-red-active: #c10034;
+    --text-primary: #222222;
+    --text-secondary: #717171;
+    --border-light: #ebebeb;
+    --border-card: #e2e8f0;
+    --bg-page: #ffffff;
+    --bg-muted: #f7f7f7;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --radius-pill: 50px;
+    --font-serif: Georgia, "Times New Roman", Times, serif;
+    /* Bootstrap Global Font Overrides */
+    --bs-body-font-family: Georgia, "Times New Roman", Times, serif !important;
+    --bs-font-sans-serif: Georgia, "Times New Roman", Times, serif !important;
+    --bs-btn-font-family: Georgia, "Times New Roman", Times, serif !important;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Enforce Georgia / Times New Roman globally across every single element */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+input,
+button,
+select,
+optgroup,
+textarea,
+.btn,
+.navbar,
+.card,
+.nav-link,
+.dropdown-item,
+.form-control,
+.form-select,
+.badge {
+    font-family: Georgia, "Times New Roman", Times, serif !important;
+}
+
+/* Maintain Font Awesome icon glyph font family */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab,
+.fa-solid,
+.fa-regular,
+.fa-brands,
+[class^="fa-"],
+[class*=" fa-"] {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome" !important;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   Layout Containers
+   -------------------------------------------------------------------------- */
+.main-wrapper {
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+/* Wide immersive container for Listings Explore Page */
+.listings-page-wrapper {
+    width: 100%;
+    max-width: 1780px;
+    margin: 0 auto;
+    padding: 1.25rem 3rem 3rem;
+}
+
+/* Standard constrained container for Forms & Detail Views */
+.form-page-container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 3.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Universal Red & White Oval Button System
+   -------------------------------------------------------------------------- */
+.nav-btn,
+.btn-brand-primary,
+.btn-brand-outline,
+.signup-btn,
+.add-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill) !important;
+    font-weight: 600 !important;
+    font-size: 0.92rem !important;
+    padding: 0.48rem 1.4rem !important;
+    text-decoration: none !important;
+    transition: all 0.22s ease !important;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Solid Red Oval Button */
+.nav-btn-primary,
+.btn-brand-primary,
+.signup-btn,
+.add-btn {
+    background-color: var(--brand-red) !important;
+    color: #ffffff !important;
+    border: 1.5px solid var(--brand-red) !important;
+    box-shadow: 0 2px 6px rgba(255, 56, 92, 0.22);
+}
+
+.nav-btn-primary:hover,
+.btn-brand-primary:hover,
+.signup-btn:hover,
+.add-btn:hover {
+    background-color: var(--brand-red-hover) !important;
+    border-color: var(--brand-red-hover) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(255, 56, 92, 0.35);
+}
+
+.nav-btn-primary:active,
+.btn-brand-primary:active,
+.signup-btn:active,
+.add-btn:active {
+    transform: translateY(0);
+}
+
+/* Outline Red & White Oval Button */
+.nav-btn-outline,
+.btn-brand-outline {
+    background-color: #ffffff !important;
+    color: var(--brand-red) !important;
+    border: 1.5px solid var(--brand-red) !important;
+}
+
+.nav-btn-outline:hover,
+.btn-brand-outline:hover {
+    background-color: var(--brand-red) !important;
+    color: #ffffff !important;
+    border-color: var(--brand-red) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(255, 56, 92, 0.25);
+}
+
+/* Small Variant for Tables & Card Actions */
+.btn-brand-primary.btn-sm,
+.btn-brand-outline.btn-sm {
+    padding: 0.35rem 1rem !important;
+    font-size: 0.85rem !important;
+}
+
+/* Disabled State */
+.btn-brand-primary:disabled,
+.btn-brand-outline:disabled,
+.btn-brand-primary[disabled],
+.btn-brand-outline[disabled] {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Flash Messages
+   -------------------------------------------------------------------------- */
+.flash-container {
+    width: min(100% - 2rem, 760px);
+    margin: 1.25rem auto 0;
+}
+
+.flash-container .alert {
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    padding: 0.9rem 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+footer {
+    margin-top: auto;
+    background-color: var(--bg-muted);
+    border-top: 1px solid var(--border-light);
+}
+
+.f-info {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.f-socials i {
+    font-size: 1.2rem;
+    margin: 0 0.6rem;
+    color: #484848;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.f-socials i:hover {
+    color: var(--brand-red);
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    margin: 0 0.5rem;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+    color: var(--text-primary);
+}

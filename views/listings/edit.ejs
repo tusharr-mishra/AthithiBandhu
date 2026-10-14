@@ -1,0 +1,105 @@
+<% layout('/layouts/boilerplate') -%>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-9 offset-2">
+            <br>
+            <h3>Edit Listing</h3>
+            <br>
+
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data"
+                novalidate class="needs-validation">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Listing Title</label>
+                    <input id="title" name="listing[title]" value="<%= listing.title %>" type="text"
+                        class="form-control" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide a title for your listing.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" name="listing[description]" class="form-control" rows="4"
+                        required><%= listing.description %></textarea>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide a brief description of your listing.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Listing Image</label>
+                    <div class="image-upload-box" id="imageUploadBox">
+                        <img id="imagePreview" src="<%= listing.image.url %>" alt="Listing image preview">
+                        <div id="uploadPlaceholder" class="text-center d-none">
+                            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                            <p class="mb-1">Choose an image from your device</p>
+                            <small class="text-muted">JPG, PNG or WEBP</small>
+                        </div>
+                        <input type="file" name="listing[image]" id="image" class="image-file-input"
+                            accept="image/jpeg,image/png,image/webp">
+                    </div>
+                    <div class="form-text">Your current image is displayed above. Select a new image only if you want to
+                        replace it.</div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price per Night</label>
+                        <input id="price" name="listing[price]" value="<%= listing.price %>" type="number" min="0"
+                            class="form-control" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid price per night.</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="country" class="form-label">Country</label>
+                        <input id="country" name="listing[country]" value="<%= listing.country %>" type="text"
+                            class="form-control" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter the country where the property is located.</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="listing[category]" id="category" class="form-select">
+                            <% const categoryOptions = ["Popular", "City Stays", "Apartments", "Villas", "Mountains", "Beachfront", "Pools", "Heritage", "Palaces", "Countryside", "Forest Retreats", "Camping", "Desert Stays", "Luxury", "Budget Stays", "Bed & Breakfasts", "Top of the World", "Arctic", "Vineyards", "Domes", "Design", "A-Frames", "Lakefront"]; %>
+                            <% for (let cat of categoryOptions) { %>
+                                <option value="<%= cat %>" <%= (listing.category === cat) ? 'selected' : '' %>><%= cat %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input id="location" name="listing[location]" value="<%= listing.location %>" type="text"
+                        class="form-control" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide the location of the property.</div>
+                </div>
+
+                <div class="location-heading mt-4 mb-2">
+                    <h4 class="mb-1">Location Preview</h4>
+                    <p class="text-muted mb-0">Change the location or country to preview the updated map before saving.
+                    </p>
+                </div>
+                <div class="map-container listing-map-preview">
+                    <div id="map" data-map-token="<%= process.env.MAPBOX_TOKEN %>"
+                        data-coordinates="<%= JSON.stringify(listing.geometry && listing.geometry.coordinates ? listing.geometry.coordinates : []) %>"
+                        data-title="<%= listing.title %>" data-location="<%= listing.location %>"
+                        data-country="<%= listing.country %>" data-preview-mode="true">
+                        <div class="map-placeholder">Loading listing location…</div>
+                    </div>
+                </div>
+                <p id="mapStatus" class="map-caption">The map preview updates when you change the location or country.
+                </p>
+
+                <br>
+                <button type="submit" class="btn btn-brand-primary">Save Changes</button>
+                <a href="/listings/<%= listing._id %>" class="btn btn-brand-outline ms-2">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="/js/imagePreview.js"></script>
+    <script src="/js/map.js"></script>

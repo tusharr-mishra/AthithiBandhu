@@ -1,0 +1,137 @@
+<% layout('/layouts/boilerplate') -%>
+
+<div class="listings-page-wrapper">
+
+    <!-- Category Filter Bar and Tax Toggle -->
+    <div class="filter-bar-container">
+        <div class="filter-slider-wrap">
+            <button type="button" class="filter-arrow" id="filterLeft" aria-label="Scroll categories left">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div id="filters">
+                <% 
+                const categoryList = [
+                    { name: "Popular", icon: "fa-fire" },
+                    { name: "City Stays", icon: "fa-city" },
+                    { name: "Apartments", icon: "fa-building" },
+                    { name: "Villas", icon: "fa-house" },
+                    { name: "Mountains", icon: "fa-mountain" },
+                    { name: "Beachfront", icon: "fa-umbrella-beach" },
+                    { name: "Pools", icon: "fa-person-swimming" },
+                    { name: "Heritage", icon: "fa-landmark" },
+                    { name: "Palaces", icon: "fa-chess-rook" },
+                    { name: "Countryside", icon: "fa-tree" },
+                    { name: "Forest Retreats", icon: "fa-leaf" },
+                    { name: "Camping", icon: "fa-campground" },
+                    { name: "Desert Stays", icon: "fa-sun" },
+                    { name: "Luxury", icon: "fa-gem" },
+                    { name: "Budget Stays", icon: "fa-wallet" },
+                    { name: "Bed & Breakfasts", icon: "fa-mug-hot" },
+                    { name: "Top of the World", icon: "fa-earth-americas" },
+                    { name: "Arctic", icon: "fa-snowflake" },
+                    { name: "Vineyards", icon: "fa-wine-glass" },
+                    { name: "Domes", icon: "fa-igloo" },
+                    { name: "Design", icon: "fa-palette" },
+                    { name: "A-Frames", icon: "fa-house-chimney" },
+                    { name: "Lakefront", icon: "fa-water" }
+                ];
+                const activeCat = (typeof category !== 'undefined' && category) ? category : 'Popular';
+                %>
+                <% for (let cat of categoryList) { %>
+                    <% 
+                    const isSelected = (activeCat === cat.name);
+                    const href = (cat.name === 'Popular')
+                        ? `/listings${location ? `?location=${encodeURIComponent(location)}` : ''}`
+                        : `/listings?category=${encodeURIComponent(cat.name)}${location ? `&location=${encodeURIComponent(location)}` : ''}`;
+                    %>
+                    <a href="<%= href %>" class="filter <%= isSelected ? 'active' : '' %>" aria-label="Filter by <%= cat.name %>">
+                        <i class="fa-solid <%= cat.icon %>"></i>
+                        <p><%= cat.name %></p>
+                    </a>
+                <% } %>
+            </div>
+
+            <button type="button" class="filter-arrow" id="filterRight" aria-label="Scroll categories right">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- High-End Display Taxes Toggler -->
+        <div class="tax-toggle-box" id="taxToggleBox">
+            <div class="tax-text-group">
+                <span class="tax-main-label">Display total before taxes</span>
+                <span class="tax-sub-label">Includes estimated taxes & fees</span>
+            </div>
+            <div class="form-check form-switch m-0">
+                <input class="form-check-input" type="checkbox" role="switch" id="taxSwitch"
+                    aria-label="Display prices including estimated taxes">
+            </div>
+        </div>
+    </div>
+
+    <!-- No Exact Matches Fallback Banner -->
+    <% if (typeof noExactMatches !== 'undefined' && noExactMatches) { %>
+        <div class="search-fallback-banner">
+            <div class="fallback-icon-wrap">
+                <i class="fa-solid fa-compass"></i>
+            </div>
+            <div class="fallback-text-wrap">
+                <h4 class="mb-1">No direct stays found matching "<%= location %>"<%= (category && category !== 'Popular') ? ` in ${category}` : '' %></h4>
+                <p class="mb-0 text-secondary">Explore these featured luxury getaways around the world, or try another search.</p>
+            </div>
+        </div>
+    <% } %>
+
+    <!-- Edge-to-Edge Responsive Listings Grid -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-4 listings-grid">
+        <% for (let listing of allListings) { %>
+            <% const curr = getCurrencyInfo(listing.country); %>
+            <div class="col">
+                <a href="/listings/<%= listing._id %>" class="listing-card-link">
+                    <div class="listing-card">
+                        <div class="listing-image-wrapper">
+                            <img src="<%= listing.image.url %>" class="listing-card-img" alt="<%= listing.title %>" loading="lazy">
+                            <% if (listing.isGuestFavourite) { %>
+                                <span class="guest-favourite-badge">Guest favourite</span>
+                            <% } %>
+                            <button type="button" class="listing-heart-btn" aria-label="Save to wishlist"
+                                onclick="event.preventDefault(); const icon = this.querySelector('i'); icon.classList.toggle('fa-solid'); icon.classList.toggle('fa-regular'); icon.classList.toggle('text-danger');">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+
+                        <div class="listing-card-body">
+                            <div class="listing-header-row">
+                                <h3 class="listing-card-title"><%= listing.title %></h3>
+                                <span class="listing-rating-badge">
+                                    <i class="fa-solid fa-star text-warning"></i> 4.9
+                                </span>
+                            </div>
+
+                            <p class="listing-card-location"><%= listing.location %>, <%= listing.country %></p>
+
+                            <div class="listing-price-row">
+                                <span class="listing-price-val listing-price"
+                                    data-base-price="<%= listing.price %>"
+                                    data-currency-symbol="<%= curr.symbol %>"
+                                    data-locale="<%= curr.locale %>"
+                                    data-tax-rate="<%= curr.taxRate %>"
+                                    data-tax-label="<%= curr.taxLabel %>">
+                                    <%= formatPrice(listing.price, listing.country) %>
+                                </span>
+                                <span class="text-secondary"> night</span>
+                            </div>
+
+                            <span class="tax-included-label" data-tax-label="<%= curr.taxLabel %>" hidden>
+                                Includes <%= curr.taxLabel %>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<script src="/js/listings.js"></script>

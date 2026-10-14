@@ -1,0 +1,330 @@
+/* ==========================================================================
+   AthithiBandhu - Modular Navbar Stylesheet (navbar.css)
+   ========================================================================== */
+
+.navbar {
+    min-height: 80px;
+    background-color: #ffffff !important;
+    border-bottom: 1px solid var(--border-light);
+    padding: 0.75rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.navbar .container-fluid {
+    max-width: 1780px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+/* Brand Section */
+.navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--brand-red) !important;
+    text-decoration: none;
+    padding: 0;
+    margin-right: 1.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.navbar-brand:hover {
+    opacity: 0.9;
+}
+
+.brand-icon {
+    font-size: 2.25rem;
+    color: var(--brand-red);
+}
+
+.brand-name {
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--brand-red);
+    white-space: nowrap;
+}
+
+/* Center Airbnb-Style 3-Segment Search Pill */
+.navbar-search-pill {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 440px;
+    height: 48px;
+    padding: 4px 6px 4px 18px;
+    border: 1px solid #dddddd;
+    border-radius: var(--radius-pill);
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.navbar-search-pill:hover,
+.navbar-search-pill:focus-within {
+    border-color: #b0b0b0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+}
+
+.search-segment-btn {
+    border: none;
+    background: transparent;
+    padding: 0 4px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.search-divider {
+    width: 1px;
+    height: 22px;
+    margin: 0 10px;
+    background-color: #e5e5e5;
+    flex-shrink: 0;
+}
+
+.search-input-wrap {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    padding: 0 4px;
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.9;
+}
+
+.search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--brand-red);
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: var(--brand-red-hover);
+    transform: scale(1.05);
+}
+
+.search-button:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+/* Right Navigation Actions */
+.navbar-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nav-globe-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    color: #484848;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.nav-globe-btn:hover {
+    background-color: #f7f7f7;
+    color: var(--text-primary);
+}
+
+.user-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-pill);
+    background-color: #f8fafc;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+    .navbar .container-fluid {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .navbar .container-fluid {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .navbar-search-pill {
+        max-width: 100%;
+        margin: 0.75rem 0;
+    }
+
+    .navbar-right-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6rem;
+        width: 100%;
+        padding-top: 0.75rem;
+    }
+
+    .nav-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ==========================================================================
+   Language & Currency Modal Styling (Airbnb Design Standard)
+   ========================================================================== */
+.language-modal-content {
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    overflow: hidden;
+}
+
+.modal-tab-pills {
+    gap: 1.25rem;
+    border-bottom: 1px solid #ebebeb;
+    width: 100%;
+    padding-bottom: 0.5rem;
+}
+
+.modal-tab-pills .nav-link {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #717171;
+    background: transparent !important;
+    border: none;
+    border-radius: 0;
+    padding: 0.5rem 0.25rem;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.modal-tab-pills .nav-link:hover {
+    color: #222222;
+}
+
+.modal-tab-pills .nav-link.active {
+    color: #222222;
+    font-weight: 700;
+}
+
+.modal-tab-pills .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--brand-red, #ff385c);
+    border-radius: 3px 3px 0 0;
+}
+
+.tab-section-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #222222;
+}
+
+.language-grid,
+.currency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.85rem;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.lang-item,
+.currency-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    background-color: #ffffff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.lang-item:hover,
+.currency-item:hover {
+    border-color: #222222;
+    background-color: #fafafa;
+}
+
+.lang-item.active,
+.currency-item.active {
+    border-color: var(--brand-red, #ff385c);
+    background-color: rgba(255, 56, 92, 0.05);
+    box-shadow: 0 0 0 1px var(--brand-red, #ff385c);
+}
+
+.lang-name,
+.currency-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #222222;
+    line-height: 1.3;
+}
+
+.lang-region,
+.currency-code {
+    font-size: 0.82rem;
+    color: #717171;
+    margin-top: 0.25rem;
+    line-height: 1.2;
+}
+
+#preferenceStatus {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 0.88rem;
+    color: #717171;
+}
+

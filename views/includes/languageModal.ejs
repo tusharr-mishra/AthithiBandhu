@@ -1,0 +1,134 @@
+<!-- ==========================================================================
+     AthithiBandhu - Language & Currency Modal (Airbnb Style)
+     ========================================================================== -->
+<div class="modal fade" id="languageCurrencyModal" tabindex="-1" aria-labelledby="languageCurrencyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content language-modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header border-0 pb-0">
+                <ul class="nav nav-pills modal-tab-pills" id="langCurrencyTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="language-tab" data-bs-toggle="pill"
+                            data-bs-target="#language-tab-pane" type="button" role="tab"
+                            aria-controls="language-tab-pane" aria-selected="true">
+                            Language and region
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="currency-tab" data-bs-toggle="pill"
+                            data-bs-target="#currency-tab-pane" type="button" role="tab"
+                            aria-controls="currency-tab-pane" aria-selected="false">
+                            Currency
+                        </button>
+                    </li>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body p-4 pt-3">
+                <div class="tab-content" id="langCurrencyTabContent">
+
+                    <!-- Tab 1: Language & Region -->
+                    <div class="tab-pane fade show active" id="language-tab-pane" role="tabpanel" aria-labelledby="language-tab" tabindex="0">
+                        <h5 class="tab-section-title mb-3">Suggested languages & regions</h5>
+                        <div class="language-grid">
+                            <button type="button" class="lang-item active" data-lang="en-US" data-lang-name="English (United States)">
+                                <span class="lang-name">English</span>
+                                <span class="lang-region">United States</span>
+                            </button>
+                            <button type="button" class="lang-item" data-lang="en-IN" data-lang-name="English (India)">
+                                <span class="lang-name">English</span>
+                                <span class="lang-region">India</span>
+                            </button>
+                            <button type="button" class="lang-item" data-lang="hi-IN" data-lang-name="हिन्दी (भारत)">
+                                <span class="lang-name">हिन्दी</span>
+                                <span class="lang-region">भारत</span>
+                            </button>
+                            <button type="button" class="lang-item" data-lang="en-GB" data-lang-name="English (United Kingdom)">
+                                <span class="lang-name">English</span>
+                                <span class="lang-region">United Kingdom</span>
+                            </button>
+                            <button type="button" class="lang-item" data-lang="fr-FR" data-lang-name="Français (France)">
+                                <span class="lang-name">Français</span>
+                                <span class="lang-region">France</span>
+                            </button>
+                            <button type="button" class="lang-item" data-lang="es-ES" data-lang-name="Español (España)">
+                                <span class="lang-name">Español</span>
+                                <span class="lang-region">España</span>
+                            </button>
+                            <button type="button" class="lang-item" data-lang="de-DE" data-lang-name="Deutsch (Deutschland)">
+                                <span class="lang-name">Deutsch</span>
+                                <span class="lang-region">Deutschland</span>
+                            </button>
+                            <button type="button" class="lang-item" data-lang="it-IT" data-lang-name="Italiano (Italia)">
+                                <span class="lang-name">Italiano</span>
+                                <span class="lang-region">Italia</span>
+                            </button>
+                            <button type="button" class="lang-item" data-lang="ja-JP" data-lang-name="日本語 (日本)">
+                                <span class="lang-name">日本語</span>
+                                <span class="lang-region">日本</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Currency -->
+                    <div class="tab-pane fade" id="currency-tab-pane" role="tabpanel" aria-labelledby="currency-tab" tabindex="0">
+                        <h5 class="tab-section-title mb-3">Choose a display currency</h5>
+                        <div class="currency-grid">
+                            <button type="button" class="currency-item active" data-currency="ORIGINAL" data-symbol="" data-rate="1">
+                                <span class="currency-name">Original Regional</span>
+                                <span class="currency-code">Native to Listing</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="USD" data-symbol="$" data-rate="1">
+                                <span class="currency-name">United States Dollar</span>
+                                <span class="currency-code">USD – $</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="INR" data-symbol="₹" data-rate="86">
+                                <span class="currency-name">Indian Rupee</span>
+                                <span class="currency-code">INR – ₹</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="EUR" data-symbol="€" data-rate="0.92">
+                                <span class="currency-name">Euro</span>
+                                <span class="currency-code">EUR – €</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="GBP" data-symbol="£" data-rate="0.78">
+                                <span class="currency-name">British Pound</span>
+                                <span class="currency-code">GBP – £</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="CHF" data-symbol="CHF" data-rate="0.90">
+                                <span class="currency-name">Swiss Franc</span>
+                                <span class="currency-code">CHF – CHF</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="JPY" data-symbol="¥" data-rate="152">
+                                <span class="currency-name">Japanese Yen</span>
+                                <span class="currency-code">JPY – ¥</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="AED" data-symbol="AED" data-rate="3.67">
+                                <span class="currency-name">Emirati Dirham</span>
+                                <span class="currency-code">AED – AED</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="CAD" data-symbol="CA$" data-rate="1.36">
+                                <span class="currency-name">Canadian Dollar</span>
+                                <span class="currency-code">CAD – CA$</span>
+                            </button>
+                            <button type="button" class="currency-item" data-currency="AUD" data-symbol="AU$" data-rate="1.52">
+                                <span class="currency-name">Australian Dollar</span>
+                                <span class="currency-code">AUD – AU$</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal Footer Feedback -->
+            <div class="modal-footer border-0 pt-0 justify-content-between">
+                <small class="text-muted" id="preferenceStatus">Preferences apply instantly across AthithiBandhu.</small>
+                <button type="button" class="btn btn-brand-primary" data-bs-dismiss="modal">Done</button>
+            </div>
+
+        </div>
+    </div>
+</div>

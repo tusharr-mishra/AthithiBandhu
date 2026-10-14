@@ -1,0 +1,116 @@
+<% layout('/layouts/boilerplate') -%>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-9 offset-2">
+            <br>
+            <h3>Create a New Listing</h3>
+            <br>
+
+            <form method="POST" action="/listings" enctype="multipart/form-data" novalidate class="needs-validation">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Listing Title</label>
+                    <input name="listing[title]" id="title" placeholder="Enter the title of your listing" type="text"
+                        class="form-control" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide a title for your listing.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" id="description" placeholder="Describe your listing"
+                        class="form-control" rows="3" required></textarea>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide a brief description of your listing.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Listing Image</label>
+                    <div class="image-upload-box" id="imageUploadBox">
+                        <img id="imagePreview" src="" alt="Selected listing image preview" class="d-none">
+                        <div id="uploadPlaceholder" class="text-center">
+                            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                            <p class="mb-1">Choose an image from your device</p>
+                            <small class="text-muted">JPG, PNG, WEBP or GIF</small>
+                        </div>
+                        <input type="file" name="listing[image]" id="image" class="image-file-input"
+                            accept="image/jpeg,image/png,image/webp,image/gif">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price per Night</label>
+                        <input name="listing[price]" id="price" placeholder="Enter nightly rate" type="number" min="0"
+                            class="form-control" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid price per night.</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="country" class="form-label">Country</label>
+                        <input name="listing[country]" id="country" placeholder="Enter country" type="text"
+                            class="form-control" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter the country where the property is located.</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="listing[category]" id="category" class="form-select">
+                            <option value="Popular" selected>Popular</option>
+                            <option value="City Stays">City Stays</option>
+                            <option value="Apartments">Apartments</option>
+                            <option value="Villas">Villas</option>
+                            <option value="Mountains">Mountains</option>
+                            <option value="Beachfront">Beachfront</option>
+                            <option value="Pools">Pools</option>
+                            <option value="Heritage">Heritage</option>
+                            <option value="Palaces">Palaces</option>
+                            <option value="Countryside">Countryside</option>
+                            <option value="Forest Retreats">Forest Retreats</option>
+                            <option value="Camping">Camping</option>
+                            <option value="Desert Stays">Desert Stays</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Budget Stays">Budget Stays</option>
+                            <option value="Bed & Breakfasts">Bed & Breakfasts</option>
+                            <option value="Top of the World">Top of the World</option>
+                            <option value="Arctic">Arctic</option>
+                            <option value="Vineyards">Vineyards</option>
+                            <option value="Domes">Domes</option>
+                            <option value="Design">Design</option>
+                            <option value="A-Frames">A-Frames</option>
+                            <option value="Lakefront">Lakefront</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input name="listing[location]" id="location" placeholder="Enter city or location" type="text"
+                        class="form-control" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide the location of the property.</div>
+                </div>
+
+                <div class="location-heading mt-4 mb-2">
+                    <h4 class="mb-1">Location Preview</h4>
+                    <p class="text-muted mb-0">Enter a city or address to preview its location on the map.</p>
+                </div>
+                <div class="map-container listing-map-preview">
+                    <div id="map" data-map-token="<%= process.env.MAPBOX_TOKEN %>" data-coordinates=""
+                        data-title="New Listing" data-location="" data-country="" data-preview-mode="true">
+                        <div class="map-placeholder">Enter a location and country to preview the map.</div>
+                    </div>
+                </div>
+                <p id="mapStatus" class="map-caption">The map preview updates as you enter the location.</p>
+
+                <br>
+                <button class="btn btn-danger add-btn" type="submit">Add Listing</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    <script src="/js/imagePreview.js"></script>
+    <script src="/js/map.js"></script>

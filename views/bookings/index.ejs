@@ -1,0 +1,181 @@
+<% layout('/layouts/boilerplate') -%>
+
+<%
+    const formatDDMMYYYY = (dateVal) => {
+        if (!dateVal) return "";
+        const d = new Date(dateVal);
+        const day = String(d.getUTCDate ? d.getUTCDate() : d.getDate()).padStart(2, "0");
+        const month = String((d.getUTCMonth ? d.getUTCMonth() : d.getMonth()) + 1).padStart(2, "0");
+        const year = d.getUTCFullYear ? d.getUTCFullYear() : d.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
+    const currentFilter = (typeof activeFilter !== 'undefined' && activeFilter) ? activeFilter : 'all';
+    const countsData = (typeof counts !== 'undefined' && counts) ? counts : {
+        all: (typeof bookings !== 'undefined' && bookings) ? bookings.length : 0,
+        confirmed: (typeof bookings !== 'undefined' && bookings) ? bookings.filter(b => b.status === 'confirmed').length : 0,
+        cancelled: (typeof bookings !== 'undefined' && bookings) ? bookings.filter(b => b.status === 'cancelled').length : 0
+    };
+%>
+
+        <div class="container py-4" style="max-width: 1040px; font-family: Georgia, 'Times New Roman', Times, serif;">
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom flex-wrap gap-2">
+                <div>
+                    <h1 class="h2 fw-bold text-dark mb-1">Your Reservations</h1>
+                    <p class="text-secondary mb-0">Manage all your booked getaways on AthithiBandhu.</p>
+                </div>
+                <a href="/listings" class="btn btn-brand-outline">
+                    <i class="fa-solid fa-magnifying-glass me-1"></i> Explore More Stays
+                </a>
+            </div>
+
+            <!-- Booking Status Filter Tabs -->
+            <div class="d-flex gap-2 mb-4 flex-wrap">
+                <a href="/bookings" class="btn btn-sm <%= (currentFilter === 'all') ? 'btn-brand-primary' : 'btn-brand-outline' %>">
+                    All Trips (<%= countsData.all %>)
+                </a>
+                <a href="/bookings?filter=confirmed" class="btn btn-sm <%= (currentFilter === 'confirmed') ? 'btn-brand-primary' : 'btn-brand-outline' %>">
+                    <i class="fa-solid fa-circle-check me-1"></i> Confirmed (<%= countsData.confirmed %>)
+                </a>
+                <a href="/bookings?filter=cancelled" class="btn btn-sm <%= (currentFilter === 'cancelled') ? 'btn-brand-primary' : 'btn-brand-outline' %>">
+                    <i class="fa-solid fa-ban me-1"></i> Cancelled (<%= countsData.cancelled %>)
+                </a>
+            </div>
+
+            <% if (!bookings || bookings.length===0) { %>
+                <div class="card border-0 shadow-sm text-center py-5" style="border-radius: 16px;">
+                    <div class="card-body">
+                        <i class="fa-solid fa-suitcase-rolling text-danger mb-3" style="font-size: 3rem;"></i>
+                        <h3 class="h4 fw-bold">No trips found</h3>
+                        <p class="text-secondary mb-4">
+                            <%= (currentFilter === 'cancelled') ? 'You have no cancelled reservations.' : 'Time to dust off your bags and start planning your next great adventure.' %>
+                        </p>
+                        <a href="/listings" class="btn btn-brand-primary px-4 py-2">
+                            Start Exploring
+                        </a>
+                    </div>
+                </div>
+                <% } else { %>
+                    <div class="row g-4">
+                        <% bookings.forEach(booking=> { %>
+                            <% 
+                                const listing = booking.listing;
+                                const title = (listing && listing.title) || booking.listingTitle || "Reserved Stay";
+                                const location = (listing && listing.location) || booking.listingLocation || "Archived Destination";
+                                const country = (listing && listing.country) || booking.listingCountry || "";
+                                const imageUrl = (listing && listing.image && listing.image.url) 
+                                    || booking.listingImage 
+                                    || "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=60";
+                            %>
+                                <div class="col-12">
+                                    <div class="card border shadow-sm" style="border-radius: 16px; overflow: hidden;">
+                                        <div class="row g-0 align-items-center">
+                                            <!-- Listing Thumbnail -->
+                                            <div class="col-md-4 col-12">
+                                                <img src="<%= imageUrl %>" class="img-fluid w-100"
+                                                    style="height: 220px; object-fit: cover;"
+                                                    alt="<%= title %>">
+                                            </div>
+
+                                            <!-- Booking Details -->
+                                            <div class="col-md-8 col-12">
+                                                <div class="card-body p-4">
+                                                    <div
+                                                        class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+                                                        <div>
+                                                            <span
+                                                                class="badge <%= booking.status === 'confirmed' ? 'bg-success' : 'bg-secondary' %> rounded-pill mb-1">
+                                                                <%= booking.status==='confirmed'
+                                                                    ? 'Confirmed Reservation' : 'Cancelled' %>
+                                                            </span>
+                                                            <h4 class="card-title fw-bold mb-1">
+                                                                <% if (listing) { %>
+                                                                    <a href="/listings/<%= listing._id %>"
+                                                                        class="text-dark text-decoration-none">
+                                                                        <%= title %>
+                                                                    </a>
+                                                                <% } else { %>
+                                                                    <%= title %>
+                                                                <% } %>
+                                                            </h4>
+                                                            <p class="text-secondary small mb-2">
+                                                                <i class="fa-solid fa-location-dot text-danger me-1"></i>
+                                                                <%= location %><%= country ? `, ${country}` : '' %>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="text-md-end">
+                                                            <span class="text-secondary small d-block">Total Paid</span>
+                                                            <strong class="fs-5 text-dark">
+                                                                <%= listing ? formatPrice(booking.totalPrice, listing.country) : `$ ${booking.totalPrice}` %>
+                                                            </strong>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Dates Grid -->
+                                                    <div
+                                                        class="row g-2 py-2 my-2 border-top border-bottom bg-light rounded px-2">
+                                                        <div class="col-sm-4 col-6">
+                                                            <small
+                                                                class="text-secondary d-block fw-bold">CHECK-IN</small>
+                                                            <span class="fw-semibold text-dark">
+                                                                <%= formatDDMMYYYY(booking.checkIn) %>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-4 col-6">
+                                                            <small
+                                                                class="text-secondary d-block fw-bold">CHECKOUT</small>
+                                                            <span class="fw-semibold text-dark">
+                                                                <%= formatDDMMYYYY(booking.checkOut) %>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col-sm-4 col-12">
+                                                            <small
+                                                                class="text-secondary d-block fw-bold">DURATION</small>
+                                                            <span class="fw-semibold text-dark">
+                                                                <%= booking.totalNights %> night(s)
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Actions -->
+                                                    <div
+                                                        class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
+                                                        <small class="text-muted">
+                                                            <i class="fa-solid fa-shield-halved text-success me-1"></i>
+                                                            Concurrency protected · Booked on <%=
+                                                                formatDDMMYYYY(booking.createdAt) %>
+                                                        </small>
+
+                                                        <div class="d-flex gap-2">
+                                                            <% if (booking.status==='confirmed' ) { %>
+                                                                <form action="/bookings/<%= booking._id %>?_method=DELETE"
+                                                                    method="POST" class="m-0"
+                                                                    onsubmit="return confirm('Are you sure you want to cancel this reservation? The reserved dates will be released immediately.');">
+                                                                    <button type="submit"
+                                                                        class="btn btn-outline-danger btn-sm">
+                                                                        <i class="fa-solid fa-ban me-1"></i> Cancel
+                                                                        Reservation
+                                                                    </button>
+                                                                </form>
+                                                            <% } else { %>
+                                                                <form action="/bookings/<%= booking._id %>/remove?_method=DELETE"
+                                                                    method="POST" class="m-0"
+                                                                    onsubmit="return confirm('Permanently remove this reservation from your screen?');">
+                                                                    <button type="submit"
+                                                                        class="btn btn-outline-secondary btn-sm">
+                                                                        <i class="fa-solid fa-trash-can me-1"></i> Remove from Screen
+                                                                    </button>
+                                                                </form>
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+                    </div>
+                    <% } %>
+        </div>

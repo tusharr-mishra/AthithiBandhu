@@ -1,0 +1,94 @@
+/* ==========================================================================
+   AthithiBandhu - Modular Forms Stylesheet (forms.css)
+   ========================================================================== */
+
+.form-card {
+    background: #ffffff;
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-sm);
+    padding: 2.25rem;
+}
+
+.image-upload-box {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    border: 2px dashed #ced4da;
+    border-radius: 12px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.image-upload-box:hover {
+    border-color: var(--brand-red);
+    background: #ffffff;
+}
+
+.image-upload-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 6px;
+    background: #ffffff;
+}
+
+.image-file-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 2.2rem;
+    color: var(--brand-red);
+    margin-bottom: 8px;
+}
+
+.listing-map-preview {
+    height: 360px;
+}
+
+.map-placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    color: #6c757d;
+    background: #f8f9fa;
+}
+
+/* Form Validation Styles */
+.needs-validation.was-validated .form-control:invalid,
+.needs-validation.was-validated .form-select:invalid {
+    border-color: var(--brand-red);
+}
+
+.needs-validation .invalid-feedback {
+    color: var(--brand-red);
+    font-size: 0.85rem;
+}
+
+.needs-validation.was-validated .form-control:invalid:focus,
+.needs-validation.was-validated .form-select:invalid:focus {
+    box-shadow: 0 0 0 0.15rem rgba(255, 56, 92, 0.2);
+}
+
+.signup-link {
+    color: var(--brand-red) !important;
+}
+
+.signup-link:hover {
+    color: var(--brand-red-hover) !important;
+    text-decoration: underline !important;
+}

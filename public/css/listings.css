@@ -1,0 +1,749 @@
+/* ==========================================================================
+   AthithiBandhu - Modular Listings Stylesheet (listings.css)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Category Filter Slider & Display Taxes Toggle
+   -------------------------------------------------------------------------- */
+.filter-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.filter-slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    position: relative;
+}
+
+#filters {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0.5rem 0 0.75rem;
+}
+
+#filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    gap: 0.5rem;
+    padding: 0.25rem 0.25rem 0.75rem;
+    color: #717171;
+    text-decoration: none !important;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+    opacity: 0.8;
+}
+
+.filter:hover {
+    color: var(--brand-red);
+    opacity: 1;
+    border-bottom-color: var(--brand-red);
+}
+
+.filter.active {
+    color: var(--brand-red) !important;
+    opacity: 1;
+    border-bottom-color: var(--brand-red) !important;
+}
+
+.filter.active p {
+    font-weight: 700;
+    color: var(--brand-red);
+}
+
+.filter i {
+    font-size: 1.35rem;
+}
+
+.filter p {
+    margin: 0;
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+/* Fallback Search Recommendation Banner */
+.search-fallback-banner {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: #fff8f9;
+    border: 1.5px solid rgba(255, 56, 92, 0.25);
+    border-radius: var(--radius-card);
+    padding: 1.25rem 1.75rem;
+    margin-bottom: 2rem;
+}
+
+.fallback-icon-wrap {
+    font-size: 2.2rem;
+    color: var(--brand-red);
+    flex-shrink: 0;
+}
+
+.fallback-text-wrap h4 {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.fallback-text-wrap p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.filter-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #dcdcdc;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #222222;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.filter-arrow:hover:not(:disabled) {
+    background: #f7f7f7;
+    border-color: #222222;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.filter-arrow:disabled {
+    opacity: 0.25;
+    cursor: default;
+}
+
+/* Enhanced High-End Display Taxes Toggler Box (Red Brand Theme) */
+.tax-toggle-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    min-width: 260px;
+    height: 54px;
+    padding: 0.5rem 1.25rem;
+    border: 1.5px solid var(--border-card);
+    border-radius: var(--radius-card);
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.tax-toggle-box:hover {
+    border-color: var(--brand-red);
+    box-shadow: 0 2px 8px rgba(255, 56, 92, 0.15);
+}
+
+.tax-toggle-box.active,
+.tax-toggle-box:has(.form-check-input:checked) {
+    border-color: var(--brand-red);
+    background-color: #fff8f9;
+    box-shadow: 0 2px 10px rgba(255, 56, 92, 0.18);
+}
+
+.tax-toggle-box.active .tax-main-label,
+.tax-toggle-box:has(.form-check-input:checked) .tax-main-label {
+    color: var(--brand-red);
+}
+
+.tax-toggle-box .tax-text-group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    user-select: none;
+}
+
+.tax-toggle-box .tax-main-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+    transition: color 0.2s ease;
+}
+
+.tax-toggle-box .tax-sub-label {
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.tax-toggle-box .form-check-input {
+    width: 2.85rem;
+    height: 1.5rem;
+    margin: 0;
+    cursor: pointer;
+    border-color: #b0b0b0;
+    box-shadow: none;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.tax-toggle-box .form-check-input:checked {
+    background-color: var(--brand-red) !important;
+    border-color: var(--brand-red) !important;
+}
+
+.tax-toggle-box .form-check-input:focus {
+    border-color: var(--brand-red);
+    box-shadow: 0 0 0 0.2rem rgba(255, 56, 92, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   2. Listing Cards Grid (Edge-to-Edge Responsive Layout)
+   -------------------------------------------------------------------------- */
+.listings-grid {
+    margin-top: 0.5rem;
+}
+
+.listing-card-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+    height: 100%;
+}
+
+.listing-card {
+    border: none !important;
+    background: transparent;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 20 / 19;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background-color: #e5e5e5;
+    margin-bottom: 0.75rem;
+}
+
+.listing-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.listing-card-link:hover .listing-card-img {
+    transform: scale(1.04);
+}
+
+/* Guest Favourite Pill Badge */
+.guest-favourite-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #ffffff;
+    color: #222222;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.28rem 0.75rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    letter-spacing: -0.2px;
+    z-index: 3;
+    pointer-events: none;
+    line-height: 1.2;
+}
+
+/* Favorite Heart Badge */
+.listing-heart-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+    transition: transform 0.2s ease;
+    z-index: 3;
+}
+
+.listing-heart-btn:hover {
+    transform: scale(1.15);
+}
+
+/* Card Content Typography */
+.listing-card-body {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.listing-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.listing-card-title {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.listing-rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    flex-shrink: 0;
+}
+
+.listing-card-location {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listing-price-row {
+    margin-top: 4px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.listing-price-val {
+    font-weight: 600;
+}
+
+.tax-included-label {
+    display: inline-block;
+    margin-top: 3px;
+    color: var(--brand-red);
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   3. Listing Details (Show View) & Reviews - Airbnb Standard
+   -------------------------------------------------------------------------- */
+.show-page-wrapper {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 4rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.show-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #222222;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+    margin-bottom: 0.5rem;
+}
+
+.show-sub-header {
+    font-size: 0.95rem;
+    color: #717171;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.meta-dot {
+    color: #999999;
+    font-weight: bold;
+}
+
+.show-review-link {
+    color: #222222;
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.show-review-link:hover {
+    color: var(--brand-red);
+}
+
+.show-guest-fav-tag {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    color: var(--brand-red);
+    background-color: rgba(255, 56, 92, 0.08);
+    padding: 0.2rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.82rem;
+}
+
+.show-location-pill {
+    color: #484848;
+}
+
+/* Hero Image Showcase */
+.show-hero-wrap {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+    background-color: #f0f0f0;
+}
+
+.show-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.show-hero-wrap:hover .show-hero-img {
+    transform: scale(1.02);
+}
+
+.show-badge-lg {
+    font-size: 0.88rem;
+    padding: 0.38rem 0.95rem;
+    border-radius: 24px;
+    top: 16px;
+    left: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+}
+
+.show-hero-heart {
+    top: 16px;
+    right: 16px;
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+/* Host Card Section */
+.show-host-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.host-avatar-icon {
+    font-size: 2.75rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.host-name {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #222222;
+}
+
+.host-status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #334155;
+    white-space: nowrap;
+}
+
+/* Highlights Section */
+.show-highlights-section {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.highlight-item {
+    display: flex;
+    gap: 1.15rem;
+    align-items: flex-start;
+}
+
+.highlight-icon {
+    font-size: 1.35rem;
+    color: var(--brand-red);
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.highlight-item h6 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #222222;
+    margin-bottom: 0.25rem;
+}
+
+.highlight-item small {
+    display: block;
+    line-height: 1.45;
+}
+
+/* Description Section */
+.show-description-section {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.show-description-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #333333;
+    margin-bottom: 0;
+}
+
+/* Overview Chips */
+.show-meta-badges {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.overview-chip {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* Floating Booking Card (Right Column) */
+.show-booking-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    position: sticky;
+    top: 90px;
+    z-index: 10;
+}
+
+.booking-price-val {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #222222;
+}
+
+.booking-price-unit {
+    font-size: 0.95rem;
+}
+
+.booking-card-rating {
+    font-size: 0.95rem;
+}
+
+.booking-breakdown-box {
+    background-color: #fcfcfc;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 1rem 1.15rem;
+    font-size: 0.9rem;
+}
+
+.booking-breakdown-box .fw-semibold {
+    font-weight: 600;
+}
+
+/* Date Picker Input Box */
+.booking-dates-box {
+    border: 1px solid #b0b0b0;
+    border-radius: 12px;
+    padding: 0.65rem 0.85rem;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-dates-box:focus-within {
+    border-color: #222222;
+    box-shadow: 0 0 0 1px #222222;
+}
+
+.booking-field-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: #222222;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+    display: block;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.booking-date-input {
+    border: none;
+    padding: 0;
+    font-size: 0.88rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #484848;
+    background: transparent;
+    box-shadow: none !important;
+}
+
+.booking-date-input:focus {
+    outline: none;
+    background: transparent;
+}
+
+.section-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222222;
+}
+
+.review-card {
+    background: #ffffff;
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.review-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   4. Mapbox Container
+   -------------------------------------------------------------------------- */
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 440px;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border-card);
+    box-shadow: var(--shadow-sm);
+    background: #f5f5f5;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+}
+
+.map-location-card {
+    position: absolute;
+    z-index: 2;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+.map-location-card > i {
+    font-size: 1.3rem;
+    color: var(--brand-red);
+}
+
+.map-location-card strong {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.map-location-card small {
+    margin-top: 3px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.map-caption {
+    margin-top: 12px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    .filter-bar-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .tax-toggle-box {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .map-container {
+        height: 320px;
+    }
+}

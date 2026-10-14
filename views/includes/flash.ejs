@@ -1,0 +1,32 @@
+<div class="flash-container">
+<% if (success && success.length) { %>
+<% for (let msg of success) { %>
+<% let alertType="success" ; %>
+<% const lowerMsg=msg.toLowerCase(); %>
+
+<% if (lowerMsg.includes("updated")) { %>
+    <% alertType="warning" ; %>
+        <% } else if (lowerMsg.includes("deleted")) { %>
+            <% alertType="danger" ; %>
+                <% } %>
+
+                    <div class="alert alert-<%= alertType %> alert-dismissible fade show"
+                        role="alert">
+                        <%= msg %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </div>
+                    <% } %>
+                        <% } %>
+
+                            <% if (error && error.length) { %>
+                                <% for (let msg of error) { %>
+                                    <div class="alert alert-danger alert-dismissible fade show"
+                                        role="alert">
+                                        <%= msg %>
+                                            <button type="button" class="btn-close"
+                                                data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+</div>
