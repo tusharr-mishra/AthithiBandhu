@@ -22,7 +22,6 @@
 | **Production Web Service** | `https://athithibandhu.onrender.com` |
 | **API Health Status** | `Operational — HTTP 200 OK` |
 | **Database Cluster** | `MongoDB Atlas (Cloud Database Cluster0)` |
-| **Source Repository** | [https://github.com/tusharr-mishra/AthithiBandhu](https://github.com/tusharr-mishra/AthithiBandhu) |
 
 </div>
 
@@ -391,7 +390,7 @@ Navigate to `http://localhost:8080` in your web browser.
 
 ## Author & License
 
-* **Author**: [Tushar Mishra](https://github.com/tusharr-mishra)
+* **Author**: [Tushar Mishra]
 * **License**: This project is licensed under the [MIT License](LICENSE).
 
 </div>
