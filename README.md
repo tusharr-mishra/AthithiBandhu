@@ -19,7 +19,7 @@
 
 | Deployment Resource | Target URL / Status |
 | :--- | :--- |
-| **Production Web Service** | `https://athithibandhu.onrender.com` *(Paste your Render Live URL here)* |
+| **Production Web Service** | `https://athithibandhu.onrender.com` |
 | **API Health Status** | `Operational — HTTP 200 OK` |
 | **Database Cluster** | `MongoDB Atlas (Cloud Database Cluster0)` |
 | **Source Repository** | [https://github.com/tusharr-mishra/AthithiBandhu](https://github.com/tusharr-mishra/AthithiBandhu) |
